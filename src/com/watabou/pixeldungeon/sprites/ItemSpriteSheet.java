@@ -17,6 +17,8 @@
  */
 package com.watabou.pixeldungeon.sprites;
 
+import com.watabou.pixeldungeon.items.Heap;
+
 public class ItemSpriteSheet {
 	
 	// Placeholders
@@ -180,4 +182,24 @@ public class ItemSpriteSheet {
 	public static final int WEIGHT	= 123;
 	public static final int BOMB	= 124;
 	public static final int HONEYPOT= 125;
+
+	public static int getNum(Heap.Type type){
+		switch (type) {
+			case CHEST:
+			case MIMIC:
+				return ItemSpriteSheet.CHEST;
+			case LOCKED_CHEST:
+				return ItemSpriteSheet.LOCKED_CHEST;
+			case CRYSTAL_CHEST:
+				return ItemSpriteSheet.CRYSTAL_CHEST;
+			case TOMB:
+				return ItemSpriteSheet.TOMB;
+			case SKELETON:
+				return ItemSpriteSheet.BONES;
+			case HIDDEN:
+				return ItemSpriteSheet.HIDDEN;
+			default:
+				return 0;
+		}
+	}
 }

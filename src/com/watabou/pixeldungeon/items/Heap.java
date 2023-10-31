@@ -77,26 +77,34 @@ public class Heap implements Bundlable {
 	
 	public LinkedList<Item> items = new LinkedList<Item>();
 	
+//	public int image() {
+//		switch (type) {
+//		case HEAP:
+//		case FOR_SALE:
+//			return size() > 0 ? items.peek().image() : 0;
+//		case CHEST:
+//		case MIMIC:
+//			return ItemSpriteSheet.CHEST;
+//		case LOCKED_CHEST:
+//			return ItemSpriteSheet.LOCKED_CHEST;
+//		case CRYSTAL_CHEST:
+//			return ItemSpriteSheet.CRYSTAL_CHEST;
+//		case TOMB:
+//			return ItemSpriteSheet.TOMB;
+//		case SKELETON:
+//			return ItemSpriteSheet.BONES;
+//		case HIDDEN:
+//			return ItemSpriteSheet.HIDDEN;
+//		default:
+//			return 0;
+//		}
+//	}
+
 	public int image() {
-		switch (type) {
-		case HEAP:
-		case FOR_SALE:
+		if (type.equals(Type.FOR_SALE) || type.equals(Type.HEAP)){
 			return size() > 0 ? items.peek().image() : 0;
-		case CHEST:
-		case MIMIC:
-			return ItemSpriteSheet.CHEST;
-		case LOCKED_CHEST:
-			return ItemSpriteSheet.LOCKED_CHEST;
-		case CRYSTAL_CHEST:
-			return ItemSpriteSheet.CRYSTAL_CHEST;
-		case TOMB:
-			return ItemSpriteSheet.TOMB;
-		case SKELETON:
-			return ItemSpriteSheet.BONES;
-		case HIDDEN:
-			return ItemSpriteSheet.HIDDEN;
-		default:
-			return 0;
+		} else {
+			return ItemSpriteSheet.getNum(type);
 		}
 	}
 	
