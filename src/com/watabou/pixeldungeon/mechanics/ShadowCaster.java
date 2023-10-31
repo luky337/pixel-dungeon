@@ -68,44 +68,132 @@ public final class ShadowCaster {
 		scanSector( x, y, 0, 0, -1, -1 );
 	}
 	
-	private static void scanSector( int cx, int cy, int m1, int m2, int m3, int m4 ) {
+	// private static void scanSector( int cx, int cy, int m1, int m2, int m3, int m4 ) {
 		
+	// 	obs.reset();
+		
+	// 	for (int p=1; p <= distance; p++) {
+
+	// 		float dq2 = 0.5f / p;
+			
+	// 		int pp = limits[p];
+	// 		for (int q=0; q <= pp; q++) {
+				
+	// 			int x = cx + q * m1 + p * m3;
+	// 			int y = cy + p * m2 + q * m4;
+				
+	// 			if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH) {
+					
+	// 				float a0 = (float)q / p;
+	// 				float a1 = a0 - dq2;
+	// 				float a2 = a0 + dq2;
+					
+	// 				int pos = y * WIDTH + x;
+	
+	// 				if (obs.isBlocked( a0 ) && obs.isBlocked( a1 ) && obs.isBlocked( a2 )) {
+	// 					// Do nothing					
+	// 				} else {
+	// 					fieldOfView[pos] = true;
+	// 				}
+					
+	// 				if (losBlocking[pos]) {
+	// 					obs.add( a1, a2 );
+	// 				}
+
+	// 			}
+	// 		}
+			
+	// 		obs.nextRow();
+	// 	}
+	// }
+
+	private static void scanSector(SSParams params) {
+		int cx = params.getCx();
+		int cy = params.getCy();
+		int m1 = params.getM1();
+		int m2 = params.getM2();
+		int m3 = params.getM3();
+		int m4 = params.getM4();
+
 		obs.reset();
-		
+
 		for (int p=1; p <= distance; p++) {
 
 			float dq2 = 0.5f / p;
-			
+
 			int pp = limits[p];
 			for (int q=0; q <= pp; q++) {
-				
+
 				int x = cx + q * m1 + p * m3;
 				int y = cy + p * m2 + q * m4;
-				
+
 				if (y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH) {
-					
+
 					float a0 = (float)q / p;
 					float a1 = a0 - dq2;
 					float a2 = a0 + dq2;
-					
+
 					int pos = y * WIDTH + x;
-	
+
 					if (obs.isBlocked( a0 ) && obs.isBlocked( a1 ) && obs.isBlocked( a2 )) {
-						// Do nothing					
+						// Do nothing
 					} else {
 						fieldOfView[pos] = true;
 					}
-					
+
 					if (losBlocking[pos]) {
 						obs.add( a1, a2 );
 					}
 
 				}
 			}
-			
+
 			obs.nextRow();
 		}
 	}
+
+	public class SSParams {
+		private int cx;
+		private int cy;
+		private int m1;
+		private int m2;
+		private int m3;
+		private int m4;
+	  
+		public SSParams(int cx, int cy, int m1, int m2, int m3, int m4) {
+		   this.cx = cx;
+		   this.cy = cy;
+		   this.m1 = m1;
+		   this.m2 = m2;
+		   this.m3 = m3;
+		   this.m4 = m4;
+		}
+	  
+		public int getCx() {
+			return cx;
+		}
+
+		public int getCy() {
+			return cy;
+		}
+
+		public int getM1() {
+			return m1;
+		}
+
+		public int getM2() {
+			return m2;
+		}
+
+		public int getM3() {
+			return m3;
+		}
+
+		public int getM4() {
+			return m4;
+		}
+	}
+	  
 	
 	private static final class Obstacles {
 		
